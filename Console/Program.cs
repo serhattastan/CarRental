@@ -2,6 +2,7 @@
 using DataAccess.Abstrarct;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.VisualBasic;
 
 namespace ConsoleUIUI;
 //SOLID
@@ -20,7 +21,12 @@ class Program
         //Car mycar = new Car {CarId = 12, BrandId = 1, ColorId = 3, DailyPrice = 0, CarName = "qsadasd"};
         //AddCar(mycar);    //Sorunsuz
 
-        GetCarDetail();
+        //GetCarDetail();
+
+        Rental newRental = new Rental { Id = 6, CarId = 3, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null };
+        AddRent(newRental);
+
+        //GetAllRental();
 
     }
     private static void AddCar(Car car)
@@ -72,6 +78,20 @@ class Program
             Console.WriteLine(result.Message);
         }
 
+    }
+    private static void AddRent(Rental rental)
+    {
+        RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        rentalManager.Add(rental);
+    }
+    private static void GetAllRental()
+    {
+        RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        var result = rentalManager.GetAll();
+        foreach (var rental in result.Data)
+        {
+            Console.WriteLine( rental.Id + rental.CarId + rental.CustomerId);
+        }
     }
     
 }
