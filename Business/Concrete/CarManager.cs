@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstrarct;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +24,14 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+            IResult result = BusinessRules.Run(CheckIfDescriptionLength(car), CheckIfDailyPriceNull(car));
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.NewCarAdded);
         }
@@ -41,6 +50,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id), Messages.ByBrandListed);
         }
+        public IDataResult<List<Car>> GetAllByColorId(int id)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.ByColorListed);
+        }
 
         public IDataResult<List<Car>> GetAllByModelYear(decimal min, decimal max)
         {
@@ -57,5 +70,28 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max));
         }
 
+        private IResult CheckIfDescriptionLength(Car car)
+        {
+            var description = car.CarName;
+            if (description == null || description.Length < 2)
+            {
+                return new ErrorResult(Messages.WrongDescriptionType);
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfDailyPriceNull(Car car)
+        {
+            var description = car.DailyPrice;
+            if (description == null || description <= 0)
+            {
+                return new ErrorResult(Messages.WrongDescriptionType);
+            }
+            return new SuccessResult();
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+        }
     }
 }

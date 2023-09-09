@@ -11,7 +11,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        GetAllCar();
+        //GetCarsByBrand(); //Sorunsuz
+
+        //GetAllCar();      //Sorunsuz
+
+        //BrandTest();      //Sorunsuz
+
+        //Car mycar = new Car {CarId = 12, BrandId = 1, ColorId = 3, DailyPrice = 0, CarName = "qsadasd"};
+        //AddCar(mycar);    //Sorunsuz
+
+        GetCarDetail();
+
     }
     private static void AddCar(Car car)
     {
@@ -25,20 +35,43 @@ class Program
         var result = carManager.GetAll();
         foreach (var car in result.Data)
         {
-            Console.WriteLine(car.CarId + "***" + car.ModelYear + "***" + car.DailyPrice + "***" + car.Description);
+            Console.WriteLine(car.CarId + "***" + car.ModelYear + "***" + car.DailyPrice + "***" + car.CarName);
         }
     }
-    //List<Car> cars;
-    //cars = new List<Car>
-    //{
-    //    new Car{CarId = 1, BrandId = 1, ColorId = 1, ModelYear = 2023, DailyPrice = 5600, Description = "Porsche Cayenne"},
-    //    new Car{CarId = 2, BrandId = 1, ColorId = 1, ModelYear = 2020, DailyPrice = 5000, Description = "Porsche Taycan"},
-    //    new Car{CarId = 3, BrandId = 2, ColorId = 2, ModelYear = 2019, DailyPrice = 1800, Description = "Ford Focus"},
-    //    new Car{CarId = 4, BrandId = 2, ColorId = 3, ModelYear = 2023, DailyPrice = 4800, Description = "Ford Mustang"},
-    //    new Car{CarId = 5, BrandId = 3, ColorId = 1, ModelYear = 2015, DailyPrice = 1000, Description = "Toyota Corolla"}
-    //};
-    //foreach (var car in cars)
-    //{
-    //    AddCar(car);
-    //}
+    private static void BrandTest()
+    {
+        BrandManager brandManager = new BrandManager(new EfBrandDal());
+        foreach (var brand in brandManager.GetAll().Data)
+        {
+            Console.WriteLine(brand.BrandId + " " + brand.BrandName);
+        }
+    }
+    private static void GetCarsByBrand(int brandId)
+    {
+        CarManager carManager = new CarManager(new EfCarDal());
+        var result = carManager.GellAllByBrandId(brandId);
+        foreach (var car in result.Data)
+        {
+            Console.WriteLine(car.CarId + "***" + car.BrandId + "***" + car.CarName);
+        }
+    }
+    private static void GetCarDetail()
+    {
+        CarManager carManager = new CarManager(new EfCarDal());
+        var result = carManager.GetCarDetails();
+
+        if (result.Success == true)
+        {
+            foreach (var car in result.Data)
+            {
+                Console.WriteLine(car.CarName + " *** " + car.ColorName + " *** " + car.BrandName + " *** " + car.DailyPrice);
+            }
+        }
+        else
+        {
+            Console.WriteLine(result.Message);
+        }
+
+    }
+    
 }
