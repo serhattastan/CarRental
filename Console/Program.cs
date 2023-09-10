@@ -12,21 +12,23 @@ class Program
 {
     static void Main(string[] args)
     {
-        //GetCarsByBrand(); //Sorunsuz
+        //GetCarsByBrand();     //Sorunsuz
 
-        //GetAllCar();      //Sorunsuz
+        //GetAllCar();          //Sorunsuz
 
-        //BrandTest();      //Sorunsuz
+        //BrandTest();          //Sorunsuz
 
         //Car mycar = new Car {CarId = 12, BrandId = 1, ColorId = 3, DailyPrice = 0, CarName = "qsadasd"};
-        //AddCar(mycar);    //Sorunsuz
+        //AddCar(mycar);        //Sorunsuz
 
-        //GetCarDetail();
+        //GetCarDetail();       //Sorunsuz
 
-        Rental newRental = new Rental { Id = 6, CarId = 3, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null };
-        AddRent(newRental);
+        //Rental newRental = new Rental { Id = 6, CarId = 3, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null };
+        //AddRent(newRental);   //Sorunsuz
 
-        //GetAllRental();
+        //GetAllRental();       //Sorunsuz
+
+        //GetAllRentalDetail(); //Sorunsuz
 
     }
     private static void AddCar(Car car)
@@ -91,6 +93,20 @@ class Program
         foreach (var rental in result.Data)
         {
             Console.WriteLine( rental.Id + rental.CarId + rental.CustomerId);
+        }
+    }
+    private static void GetAllRentalDetail()
+    {
+        RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        var result = rentalManager.GetRentalDetails();
+        foreach (var rental in result.Data)
+        {
+            Console.WriteLine("ID: " + rental.RentalId);
+            Console.WriteLine("Company Name: " + rental.CustomerName);
+            Console.WriteLine("Car Name: " + rental.CarName);
+            Console.WriteLine("Rent Date: " + rental.RentDate);
+            Console.WriteLine("Return Date: " + rental.ReturnDate);
+            Console.WriteLine("");
         }
     }
     
