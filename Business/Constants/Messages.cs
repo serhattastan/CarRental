@@ -12,9 +12,10 @@ namespace Business.Constants
         public static string CarListed = "Arabalar Listelendi!";
         public static string ByBrandListed = "Tüm Arabalar Markalarına Göre Listelendi!";
         public static string ByColorListed = "Arabalar Renklerine Göre Listelendi!";
-        internal static string WrongDescriptionType = "Açıklama Minimum 2 Karakter Uzunluğunda Olmalıdır!";
-        internal static string CarAlreadyRent = "Araç Kullanımda!";
-        internal static string CarIsAvailable = "Araç Kiralanabilir!";
-        internal static string NewRentAdded = "Araç Kiralandı!";
+        public static string WrongDescriptionType = "Açıklama Minimum 2 Karakter Uzunluğunda Olmalıdır!";
+        public static string CarAlreadyRent = "Araç Kullanımda!";
+        public static string CarIsAvailable = "Araç Kiralanabilir!";
+        public static string NewRentAdded = "Araç Kiralandı!";
+        public static string NewBrandAdded = "Yeni Marka Eklendi!";
     }
 }
