@@ -12,23 +12,23 @@ class Program
 {
     static void Main(string[] args)
     {
-        //GetCarsByBrand();     //Sorunsuz
+        //GetCarsByBrand();     //Approved
 
-        //GetAllCar();          //Sorunsuz
+        //GetAllCar();          //Approved
 
-        //BrandTest();          //Sorunsuz
+        //BrandTest();          //Approved
 
         //Car mycar = new Car {CarId = 12, BrandId = 1, ColorId = 3, DailyPrice = 0, CarName = "qsadasd"};
-        //AddCar(mycar);        //Sorunsuz
+        //AddCar(mycar);        //Approved
 
-        //GetCarDetail();       //Sorunsuz
+        //GetCarDetail();       //Approved
 
         //Rental newRental = new Rental { Id = 6, CarId = 3, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null };
-        //AddRent(newRental);   //Sorunsuz
+        //AddRent(newRental);   //Approved
 
-        //GetAllRental();       //Sorunsuz
+        //GetAllRental();       //Approved
 
-        //GetAllRentalDetail(); //Sorunsuz
+        //GetAllRentalDetail(); //Approved
 
     }
     private static void AddCar(Car car)
