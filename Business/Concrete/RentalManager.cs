@@ -41,7 +41,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetAllByCustomerId(int Id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(p => p.CustomerId == Id), Messages.ByBrandListed);
         }
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()

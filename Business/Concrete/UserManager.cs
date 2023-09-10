@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstrarct;
 using DataAccess.Concrete.EntityFramework;
@@ -18,6 +19,12 @@ namespace Business.Concrete
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
+        }
+
+        public IResult Add(User user)
+        {
+            _userDal.Add(user);
+            return new SuccessResult(Messages.NewUserAdded);
         }
 
         public IDataResult<List<User>> GetAll()

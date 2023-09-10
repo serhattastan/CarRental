@@ -19,5 +19,6 @@ namespace Business.Constants
         public static string NewBrandAdded = "Yeni Marka Eklendi!";
         public static string NewColorAdded = "Yeni Renk Eklendi!";
         public static string NewCustomerAdded = "Yeni Müşteri Eklendi!";
+        internal static string NewUserAdded = "Yeni Kullanıcı Eklendi!";
     }
 }
