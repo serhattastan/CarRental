@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstrarct;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,12 @@ namespace Business.Concrete
         public CustomerManager(ICustomerDal customerDal)
         {
             _customerDal = customerDal;
+        }
+
+        public IResult Add(Customer customer)
+        {
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.NewCustomerAdded);
         }
 
         public IDataResult<List<Customer>> GetAll()

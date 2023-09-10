@@ -17,5 +17,7 @@ namespace Business.Constants
         public static string CarIsAvailable = "Araç Kiralanabilir!";
         public static string NewRentAdded = "Araç Kiralandı!";
         public static string NewBrandAdded = "Yeni Marka Eklendi!";
+        public static string NewColorAdded = "Yeni Renk Eklendi!";
+        public static string NewCustomerAdded = "Yeni Müşteri Eklendi!";
     }
 }
